@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="col-xs-12 title-group ">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div id="dvGroupResList" class="col-xs-12">
+    @{
+        int count = 0;
+        int lenght = ViewBag.ListCategories.Count;
+    }
+    @foreach (var item in ViewBag.ListCategories)
+    {
+        
+        var strText = item.Text.Split('|');
+        string name = strText[0];
+        string total = strText[1];
+        
+        string url = item.Value;
+        // tao div grid tong cho 1 hang
+        if (count ==0)
+        {
+            @Html.Raw("<div class='grid' title="+ @count + ">");
+        }
+        if (count%3 == 0 && count > 0)
+        {
+            @Html.Raw("</div><div class='grid' title=" + @count + ">");
+        }
+        <figure class="item-wrap">
+            <img src="@url"/>
+            <figcaption>
+                <h2>@name</h2>
+                <p>@total địa điểm</p>
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <a href="#">View more</a>
+            </figcaption>
+        </figure>
+        count ++;
+    }
+    @Html.Raw("</div>");
+</div>
